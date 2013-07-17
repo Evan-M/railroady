@@ -59,6 +59,27 @@ namespace :diagram do
     end
 
   end
+  
+  namespace :mongoid_models do
+
+    desc 'Generates an class diagram for all models.'
+    task :complete do
+      f = @MODELS_ALL
+      puts "Generating #{f}"
+      sh "railroady -dilamM | dot -T#{format} > #{f}"
+    end
+
+    desc 'Generates an abbreviated class diagram for all models.'
+    task :brief do
+      f = @MODELS_BRIEF
+      puts "Generating #{f}"
+      sh "railroady -bdilamM | dot -T#{format} > #{f}"
+    end
+
+  end
+
+  desc 'Generates all class diagrams with mongo models.'
+  task :mongoid_all => ['diagram:mongoid_models:complete', 'diagram:mongoid_models:brief', 'diagram:controllers:complete', 'diagram:controllers:brief']
 
   desc 'Generates all class diagrams.'
   task :all => ['diagram:models:complete', 'diagram:models:brief', 'diagram:controllers:complete', 'diagram:controllers:brief']
