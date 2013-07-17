@@ -79,9 +79,9 @@ namespace :diagram do
   end
   
   desc 'Generates all class diagrams.'
-  task :all => ['diagram:models:complete', 'diagram:models:brief', 'diagram:controllers:complete', 'diagram:controllers:brief']
+  task all: ['diagram:models:complete', 'diagram:models:brief', 'diagram:controllers:complete', 'diagram:controllers:brief']
 
   desc 'Generates all class diagrams with mongo models.'
-  task :mongoid_all => ['diagram:mongoid_models:complete', 'diagram:mongoid_models:brief', 'diagram:controllers:complete', 'diagram:controllers:brief']
+  task mongoid_all: ['diagram:mongoid_models:complete', 'diagram:mongoid_models:brief', 'diagram:controllers:complete', 'diagram:controllers:brief']
 
 end
