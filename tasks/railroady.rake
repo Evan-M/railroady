@@ -41,24 +41,6 @@ namespace :diagram do
     end
 
   end
-
-  namespace :controllers do
-
-    desc 'Generates an class diagram for all controllers.'
-    task :complete do
-      f = @CONTROLLERS_ALL
-      puts "Generating #{f}"
-      sh "railroady -ilC | neato -T#{format} > #{f}"
-    end
-
-    desc 'Generates an abbreviated class diagram for all controllers.'
-    task :brief do
-      f = @CONTROLLERS_BRIEF
-      puts "Generating #{f}"
-      sh "railroady -bilC | neato -T#{format} > #{f}"
-    end
-
-  end
   
   namespace :mongoid_models do
 
@@ -78,10 +60,28 @@ namespace :diagram do
 
   end
 
-  desc 'Generates all class diagrams with mongo models.'
-  task :mongoid_all => ['diagram:mongoid_models:complete', 'diagram:mongoid_models:brief', 'diagram:controllers:complete', 'diagram:controllers:brief']
+  namespace :controllers do
 
+    desc 'Generates an class diagram for all controllers.'
+    task :complete do
+      f = @CONTROLLERS_ALL
+      puts "Generating #{f}"
+      sh "railroady -ilC | neato -T#{format} > #{f}"
+    end
+
+    desc 'Generates an abbreviated class diagram for all controllers.'
+    task :brief do
+      f = @CONTROLLERS_BRIEF
+      puts "Generating #{f}"
+      sh "railroady -bilC | neato -T#{format} > #{f}"
+    end
+
+  end
+  
   desc 'Generates all class diagrams.'
   task :all => ['diagram:models:complete', 'diagram:models:brief', 'diagram:controllers:complete', 'diagram:controllers:brief']
+
+  desc 'Generates all class diagrams with mongo models.'
+  task :mongoid_all => ['diagram:mongoid_models:complete', 'diagram:mongoid_models:brief', 'diagram:controllers:complete', 'diagram:controllers:brief']
 
 end
